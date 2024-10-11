@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+  <title>Maternal Health Record</title>
+</head>
+<body class="container my-4">
+  <h1 class="text-center mb-4" style=" background-color: aqua;"> Welcome To Maternal Health Care</h1>
+  <h2 class="text-center mb-4" style="background-color: green;">Maternal Health Record</h2>
+  <form action="/records" method="POST" class="row g-3">
+    
+    <!-- Basic Information -->
+    <h3>Basic Information</h3>
+    <div class="col-md-6">
+      <label for="name" class="form-label">Name</label>
+      <input type="text" id="name" name="name" class="form-control" value="<%= record ? record.name : '' %>" required>
+    </div>
+
+    <div class="col-md-6">
+      <label for="patientId" class="form-label">Patient ID</label>
+      <input type="text" id="patientId" name="patientId" class="form-control" value="<%= record ? record.patientId : '' %>" required>
+    </div>
+
+    <div class="col-md-6">
+      <label for="address" class="form-label">Address</label>
+      <input type="text" id="address" name="address" class="form-control" value="<%= record ? record.address : '' %>" required>
+    </div>
+
+    <div class="col-md-6">
+      <label for="phone" class="form-label">Phone</label>
+      <input type="tel" id="phone" name="phone" class="form-control" value="<%= record ? record.phone : '' %>" required>
+    </div>
+
+    <div class="col-md-6">
+      <label for="careUnit" class="form-label">Care Unit</label>
+      <input type="text" id="careUnit" name="careUnit" class="form-control" value="<%= record ? record.careUnit : '' %>">
+    </div>
+
+    <div class="col-md-6">
+      <label for="careUnitAddress" class="form-label">Care Unit Address</label>
+      <input type="text" id="careUnitAddress" name="careUnitAddress" class="form-control" value="<%= record ? record.careUnitAddress : '' %>">
+    </div>
+
+    <div class="col-md-6">
+      <label for="lastMenstrualPeriod" class="form-label">Last Menstrual Period</label>
+      <input type="date" id="lastMenstrualPeriod" name="lastMenstrualPeriod" class="form-control" value="<%= record ? record.lastMenstrualPeriod : '' %>">
+    </div>
+
+    <div class="col-md-6">
+      <label for="estimatedDeliveryDate" class="form-label">Estimated Delivery Date</label>
+      <input type="date" id="estimatedDeliveryDate" name="estimatedDeliveryDate" class="form-control" value="<%= record ? record.estimatedDeliveryDate : '' %>">
+    </div>
+
+    <!-- Lifestyle Information -->
+    <h3>Lifestyle</h3>
+
+    <div class="col-md-4">
+      <label for="weight" class="form-label">Weight (kg)</label>
+      <input type="number" id="weight" name="weight" class="form-control" value="<%= record ? record.lifestyle.weight : '' %>">
+    </div>
+
+    <div class="col-md-4">
+      <label for="height" class="form-label">Height (cm)</label>
+      <input type="number" id="height" name="height" class="form-control" value="<%= record ? record.lifestyle.height : '' %>">
+    </div>
+
+    <div class="col-md-4">
+      <label for="BMI" class="form-label">BMI</label>
+      <input type="text" id="BMI" name="BMI" class="form-control" value="<%= record ? record.lifestyle.BMI : '' %>">
+    </div>
+
+    <div class="col-md-4">
+      <label for="smoking" class="form-label">Smoking</label>
+      <select id="smoking" name="smoking" class="form-select">
+        <option value="true" <%= record && record.lifestyle.smoking === 'true' ? 'selected' : '' %>>Yes</option>
+        <option value="false" <%= record && record.lifestyle.smoking === 'false' ? 'selected' : '' %>>No</option>
+      </select>
+    </div>
+
+    <div class="col-md-4">
+      <label for="alcohol" class="form-label">Alcohol</label>
+      <input type="text" id="alcohol" name="alcohol" class="form-control" value="<%= record ? record.lifestyle.alcohol : '' %>">
+    </div>
+
+    <div class="col-md-4">
+      <label for="snus" class="form-label">Snus (Tobacco)</label>
+      <input type="text" id="snus" name="snus" class="form-control" value="<%= record ? record.lifestyle.snus : '' %>">
+    </div>
+
+    <div class="col-md-4">
+      <label for="physicalActivity" class="form-label">Physical Activity</label>
+      <input type="text" id="physicalActivity" name="physicalActivity" class="form-control" value="<%= record ? record.lifestyle.physicalActivity : '' %>">
+    </div>
+
+    <!-- Social Conditions -->
+    <h3>Social Conditions</h3>
+
+    <div class="col-md-6">
+      <label for="maritalStatus" class="form-label">Marital Status</label>
+      <input type="text" id="maritalStatus" name="maritalStatus" class="form-control" value="<%= record ? record.socialConditions.maritalStatus : '' %>">
+    </div>
+
+    <div class="col-md-6">
+      <label for="livingSituation" class="form-label">Living Situation</label>
+      <input type="text" id="livingSituation" name="livingSituation" class="form-control" value="<%= record ? record.socialConditions.livingSituation : '' %>">
+    </div>
+
+    <div class="col-md-6">
+      <label for="occupation" class="form-label">Occupation</label>
+      <input type="text" id="occupation" name="occupation" class="form-control" value="<%= record ? record.socialConditions.occupation : '' %>">
+    </div>
+
+    <div class="col-md-6">
+      <label for="familyHistory" class="form-label">Family History</label>
+      <input type="text" id="familyHistory" name="familyHistory" class="form-control" value="<%= record ? record.socialConditions.familyHistory : '' %>">
+    </div>
+
+    <!-- Medical History -->
+    <h3>Medical History</h3>
+
+    <div class="col-md-6">
+      <label for="currentPsychCondition" class="form-label">Current Psych Condition</label>
+      <input type="text" id="currentPsychCondition" name="currentPsychCondition" class="form-control" value="<%= record ? record.medicalHistory.currentPsychCondition : '' %>">
+    </div>
+
+    <div class="col-md-6">
+      <label for="previousPsychCondition" class="form-label">Previous Psych Condition</label>
+      <input type="text" id="previousPsychCondition" name="previousPsychCondition" class="form-control" value="<%= record ? record.medicalHistory.previousPsychCondition : '' %>">
+    </div>
+
+    <div class="col-md-6">
+      <label for="familyHistoryAnemia" class="form-label">Family History of Anemia</label>
+      <select id="familyHistoryAnemia" name="familyHistoryAnemia" class="form-select">
+        <option value="true" <%= record && record.medicalHistory.familyHistoryAnemia === 'true' ? 'selected' : '' %>>Yes</option>
+        <option value="false" <%= record && record.medicalHistory.familyHistoryAnemia === 'false' ? 'selected' : '' %>>No</option>
+      </select>
+    </div>
+
+    <!-- Pregnancy Details -->
+    <h3>Pregnancy Details</h3>
+
+    <div class="col-md-6">
+      <label for="fetalHeartRate" class="form-label">Fetal Heart Rate</label>
+      <input type="text" id="fetalHeartRate" name="fetalHeartRate" class="form-control" value="<%= record ? record.pregnancyDetails.fetalHeartRate : '' %>">
+    </div>
+
+    <div class="col-md-6">
+      <label for="amnioticFluid" class="form-label">Amniotic Fluid</label>
+      <input type="text" id="amnioticFluid" name="amnioticFluid" class="form-control" value="<%= record ? record.pregnancyDetails.amnioticFluid : '' %>">
+    </div>
+
+    <div class="col-md-6">
+      <label for="fetalMovements" class="form-label">Fetal Movements</label>
+      <input type="text" id="fetalMovements" name="fetalMovements" class="form-control" value="<%= record ? record.pregnancyDetails.fetalMovements : '' %>">
+    </div>
+
+    <div class="col-md-6">
+      <label for="placentaPosition" class="form-label">Placenta Position</label>
+      <input type="text" id="placentaPosition" name="placentaPosition" class="form-control" value="<%= record ? record.pregnancyDetails.placentaPosition : '' %>">
+    </div>
+
+    <!-- Contraceptive History -->
+    <h3>Contraceptive History</h3>
+
+    <div class="col-md-6">
+      <label for="stoppedContraceptive" class="form-label">Stopped Contraceptive</label>
+      <select id="stoppedContraceptive" name="stoppedContraceptive" class="form-select">
+        <option value="true" <%= record && record.contraceptiveHistory.stoppedContraceptive === 'true' ? 'selected' : '' %>>Yes</option>
+        <option value="false" <%= record && record.contraceptiveHistory.stoppedContraceptive === 'false' ? 'selected' : '' %>>No</option>
+      </select>
+    </div>
+
+    <div class="col-md-6">
+      <label for="spiralRemoved" class="form-label">Spiral Removed</label>
+      <select id="spiralRemoved" name="spiralRemoved" class="form-select">
+        <option value="true" <%= record && record.contraceptiveHistory.spiralRemoved === 'true' ? 'selected' : '' %>>Yes</option>
+        <option value="false" <%= record && record.contraceptiveHistory.spiralRemoved === 'false' ? 'selected' : '' %>>No</option>
+      </select>
+    </div>
+
+    <!-- Medications -->
+    <h3>Medications</h3>
+    <div class="col-md-12">
+      <label for="medications" class="form-label">Medications</label>
+      <input type="text" id="medications" name="medications" class="form-control" value="<%= record ? record.medications : '' %>">
+    </div>
+
+    <!-- Risk Factors -->
+    <h3>Risk Factors</h3>
+    <div class="col-md-6">
+      <label for="smokingRisk" class="form-label">Smoking</label>
+      <select id="smokingRisk" name="smoking" class="form-select">
+        <option value="true" <%= record && record.riskFactors.smoking === 'true' ? 'selected' : '' %>>Yes</option>
+        <option value="false" <%= record && record.riskFactors.smoking === 'false' ? 'selected' : '' %>>No</option>
+      </select>
+    </div>
+
+    <div class="col-md-6">
+      <label for="alcoholRisk" class="form-label">Alcohol</label>
+      <input type="text" id="alcoholRisk" name="alcohol" class="form-control" value="<%= record ? record.riskFactors.alcohol : '' %>">
+    </div>
+
+    <div class="col-md-6">
+      <label for="bloodPressure" class="form-label">Blood Pressure Issues</label>
+      <input type="text" id="bloodPressure" name="bloodPressure" class="form-control" value="<%= record ? record.riskFactors.bloodPressure : '' %>">
+    </div>
+
+    <div class="col-md-6">
+      <label for="anemia" class="form-label">Anemia</label>
+      <select id="anemia" name="anemia" class="form-select">
+        <option value="true" <%= record && record.riskFactors.anemia === 'true' ? 'selected' : '' %>>Yes</option>
+        <option value="false" <%= record && record.riskFactors.anemia === 'false' ? 'selected' : '' %>>No</option>
+      </select>
+    </div>
+
+    <div class="col-md-6">
+      <label for="preEclampsia" class="form-label">Pre-eclampsia</label>
+      <select id="preEclampsia" name="preEclampsia" class="form-select">
+        <option value="true" <%= record && record.riskFactors.preEclampsia === 'true' ? 'selected' : '' %>>Yes</option>
+        <option value="false" <%= record && record.riskFactors.preEclampsia === 'false' ? 'selected' : '' %>>No</option>
+      </select>
+    </div>
+
+    <!-- Lab Results -->
+    <h3>Lab Results</h3>
+
+    <div class="col-md-6">
+      <label for="ferritin" class="form-label">Ferritin</label>
+      <input type="number" id="ferritin" name="ferritin" class="form-control" value="<%= record ? record.labResults.ferritin : '' %>">
+    </div>
+
+    <div class="col-md-6">
+      <label for="TSH" class="form-label">TSH</label>
+      <input type="number" id="TSH" name="TSH" class="form-control" value="<%= record ? record.labResults.TSH : '' %>">
+    </div>
+
+    <div class="col-md-6">
+      <label for="freeThyroxine" class="form-label">Free Thyroxine</label>
+      <input type="number" id="freeThyroxine" name="freeThyroxine" class="form-control" value="<%= record ? record.labResults.freeThyroxine : '' %>">
+    </div>
+
+    <div class="col-md-6">
+      <label for="RhFactor" class="form-label">Rh Factor</label>
+      <input type="text" id="RhFactor" name="RhFactor" class="form-control" value="<%= record ? record.labResults.RhFactor : '' %>">
+    </div>
+
+    <div class="col-md-6">
+      <label for="rubellaImmunity" class="form-label">Rubella Immunity</label>
+      <input type="text" id="rubellaImmunity" name="rubellaImmunity" class="form-control" value="<%= record ? record.labResults.rubellaImmunity : '' %>">
+    </div>
+
+    <div class="col-md-6">
+      <label for="syphilis" class="form-label">Syphilis</label>
+      <input type="text" id="syphilis" name="syphilis" class="form-control" value="<%= record ? record.labResults.syphilis : '' %>">
+    </div>
+
+    <!-- Delivery Details -->
+    <h3>Delivery Details</h3>
+
+    <div class="col-md-6">
+      <label for="deliveryType" class="form-label">Delivery Type</label>
+      <input type="text" id="deliveryType" name="deliveryType" class="form-control" value="<%= record ? record.deliveryDetails.deliveryType : '' %>">
+    </div>
+
+    <div class="col-md-6">
+      <label for="birthDate" class="form-label">Birth Date</label>
+      <input type="date" id="birthDate" name="birthDate" class="form-control" value="<%= record ? record.deliveryDetails.birthDate : '' %>">
+    </div>
+
+    <div class="col-md-6">
+      <label for="birthTime" class="form-label">Birth Time</label>
+      <input type="time" id="birthTime" name="birthTime" class="form-control" value="<%= record ? record.deliveryDetails.birthTime : '' %>">
+    </div>
+
+    <div class="col-md-6">
+      <label for="gestationalWeek" class="form-label">Gestational Week</label>
+      <input type="number" id="gestationalWeek" name="gestationalWeek" class="form-control" value="<%= record ? record.deliveryDetails.gestationalWeek : '' %>">
+    </div>
+
+    <div class="col-md-6">
+      <label for="gender" class="form-label">Gender</label>
+      <input type="text" id="gender" name="gender" class="form-control" value="<%= record ? record.deliveryDetails.gender : '' %>">
+    </div>
+
+    <div class="col-md-6">
+      <label for="birthWeight" class="form-label">Birth Weight (g)</label>
+      <input type="number" id="birthWeight" name="birthWeight" class="form-control" value="<%= record ? record.deliveryDetails.birthWeight : '' %>">
+    </div>
+
+    <div class="col-md-6">
+      <label for="birthLength" class="form-label">Birth Length (cm)</label>
+      <input type="number" id="birthLength" name="birthLength" class="form-control" value="<%= record ? record.deliveryDetails.birthLength : '' %>">
+    </div>
+
+    <div class="col-md-6">
+      <label for="headCircumference" class="form-label">Head Circumference (cm)</label>
+      <input type="number" id="headCircumference" name="headCircumference" class="form-control" value="<%= record ? record.deliveryDetails.headCircumference : '' %>">
+    </div>
+
+    <!-- Apgar Score -->
+    <h4>Apgar Score</h4>
+
+    <div class="col-md-4">
+      <label for="oneMinute" class="form-label">1 Minute</label>
+      <input type="number" id="oneMinute" name="oneMinute" class="form-control" value="<%= record ? record.deliveryDetails.apgarScore.oneMinute : '' %>">
+    </div>
+
+    <div class="col-md-4">
+      <label for="fiveMinutes" class="form-label">5 Minutes</label>
+      <input type="number" id="fiveMinutes" name="fiveMinutes" class="form-control" value="<%= record ? record.deliveryDetails.apgarScore.fiveMinutes : '' %>">
+    </div>
+
+    <div class="col-md-4">
+      <label for="tenMinutes" class="form-label">10 Minutes</label>
+      <input type="number" id="tenMinutes" name="tenMinutes" class="form-control" value="<%= record ? record.deliveryDetails.apgarScore.tenMinutes : '' %>">
+    </div>
+
+    <!-- Partogram -->
+    <h3>Partogram</h3>
+    <div id="partogramContainer">
+      <!-- Example partogram entry, add dynamically if needed -->
+      <div class="col-md-6">
+        <label for="time" class="form-label">Time</label>
+        <input type="time" name="partogram[0][time]" class="form-control">
+      </div>
+
+      <div class="col-md-6">
+        <label for="cervicalDilation" class="form-label">Cervical Dilation</label>
+        <input type="number" name="partogram[0][cervicalDilation]" class="form-control">
+      </div>
+
+      <div class="col-md-6">
+        <label for="fetalHeartRatePartogram" class="form-label">Fetal Heart Rate</label>
+        <input type="text" name="partogram[0][fetalHeartRate]" class="form-control">
+      </div>
+
+      <div class="col-md-6">
+        <label for="contractionsStrength" class="form-label">Contractions Strength</label>
+        <input type="text" name="partogram[0][contractionsStrength]" class="form-control">
+      </div>
+
+      <div class="col-md-6">
+        <label for="fetalHeadDescent" class="form-label">Fetal Head Descent</label>
+        <input type="text" name="partogram[0][fetalHeadDescent]" class="form-control">
+      </div>
+    </div>
+
+
+    <!-- Submit Button -->
+    <div class="col-12">
+      <button type="submit" class="btn btn-primary">Save Record</button>
+      <a href="/records" class="btn btn-secondary">Back to List</a>
+    </div>
+
+  </form>
+</body>
+</html>

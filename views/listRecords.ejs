@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+
+  <title>All Maternal Records</title>
+</head>
+<body class="container my-4">
+  <h2 class="text-center mb-4">All Maternal Health Records</h2>
+  <table class="table table-striped">
+    <thead class="table-dark">
+      <tr>
+        <th>Name</th>
+        <th>Patient ID</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% records.forEach(function(record) { %>
+        <tr>
+          <td><%= record.name %></td>
+          <td><%= record.patientId %></td>
+          <td>
+            <a href="/records/<%= record.id %>" class="btn btn-info btn-sm">View</a>
+            <a href="/records/<%= record.id %>/edit" class="btn btn-warning btn-sm">Edit</a>
+            <form action="/records/<%= record.id %>/delete" method="POST" class="d-inline">
+              <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+            </form>
+          </td>
+        </tr>
+      <% }); %>
+    </tbody>
+  </table>
+
+  <a href="/" class="btn btn-primary">Add New Record</a>
+</body>
+</html>

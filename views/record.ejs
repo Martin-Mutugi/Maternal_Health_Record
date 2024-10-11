@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+  <title>View Maternal Health Record</title>
+</head>
+<body class="container my-4">
+  <h2>Details for <%= record.name %></h2>
+
+  <!-- Basic Information -->
+  <h3>Basic Information</h3>
+  <p><strong>Patient ID:</strong> <%= record.patientId %></p>
+  <p><strong>Address:</strong> <%= record.address %></p>
+  <p><strong>Phone:</strong> <%= record.phone %></p>
+  <p><strong>Care Unit:</strong> <%= record.careUnit %></p>
+  <p><strong>Care Unit Address:</strong> <%= record.careUnitAddress %></p>
+  <p><strong>Caregiver:</strong> <%= record.caregiver %></p>
+  <p><strong>Enrollment Date:</strong> <%= record.enrollmentDate %></p>
+  <p><strong>Last Menstrual Period:</strong> <%= record.lastMenstrualPeriod %></p>
+  <p><strong>Estimated Delivery Date:</strong> <%= record.estimatedDeliveryDate %></p>
+  <p><strong>Pregnancy Week:</strong> <%= record.pregnancyWeek %></p>
+  <p><strong>Allergies:</strong> <%= record.allergies %></p>
+
+  <!-- Lifestyle Information -->
+  <h3>Lifestyle</h3>
+  <p><strong>Weight:</strong> <%= record.lifestyle.weight %> kg</p>
+  <p><strong>Height:</strong> <%= record.lifestyle.height %> cm</p>
+  <p><strong>BMI:</strong> <%= record.lifestyle.BMI %></p>
+  <p><strong>Smoking:</strong> <%= record.lifestyle.smoking === 'true' ? 'Yes' : 'No' %></p>
+  <p><strong>Alcohol:</strong> <%= record.lifestyle.alcohol %></p>
+  <p><strong>Snus:</strong> <%= record.lifestyle.snus %></p>
+  <p><strong>Physical Activity:</strong> <%= record.lifestyle.physicalActivity %></p>
+
+  <!-- Social Conditions -->
+  <h3>Social Conditions</h3>
+  <p><strong>Marital Status:</strong> <%= record.socialConditions.maritalStatus %></p>
+  <p><strong>Living Situation:</strong> <%= record.socialConditions.livingSituation %></p>
+  <p><strong>Occupation:</strong> <%= record.socialConditions.occupation %></p>
+  <p><strong>Family History:</strong> <%= record.socialConditions.familyHistory %></p>
+
+  <!-- Medical History -->
+  <h3>Medical History</h3>
+  <p><strong>Current Psychological Condition:</strong> <%= record.medicalHistory.currentPsychCondition %></p>
+  <p><strong>Previous Psychological Condition:</strong> <%= record.medicalHistory.previousPsychCondition %></p>
+  <p><strong>Family History of Anemia:</strong> <%= record.medicalHistory.familyHistoryAnemia === 'true' ? 'Yes' : 'No' %></p>
+
+  <!-- Pregnancy Details -->
+  <h3>Pregnancy Details</h3>
+  <p><strong>Fetal Heart Rate:</strong> <%= record.pregnancyDetails.fetalHeartRate %></p>
+  <p><strong>Amniotic Fluid:</strong> <%= record.pregnancyDetails.amnioticFluid %></p>
+  <p><strong>Fetal Movements:</strong> <%= record.pregnancyDetails.fetalMovements %></p>
+  <p><strong>Placenta Position:</strong> <%= record.pregnancyDetails.placentaPosition %></p>
+
+  <!-- Contraceptive History -->
+  <h3>Contraceptive History</h3>
+  <p><strong>Stopped Contraceptive:</strong> <%= record.contraceptiveHistory.stoppedContraceptive === 'true' ? 'Yes' : 'No' %></p>
+  <p><strong>Spiral Removed:</strong> <%= record.contraceptiveHistory.spiralRemoved === 'true' ? 'Yes' : 'No' %></p>
+
+  <!-- Previous Pregnancies -->
+  <h3>Previous Pregnancies</h3>
+
+<% if (record.previousPregnancies && Array.isArray(record.previousPregnancies) && record.previousPregnancies.length > 0) { %>
+  <ul>
+    <% record.previousPregnancies.forEach(function(pregnancy) { %>
+      <li>
+        <p><strong>Year:</strong> <%= pregnancy.year %></p>
+        <p><strong>Vaginal Delivery:</strong> <%= pregnancy.vaginalDelivery ? 'Yes' : 'No' %></p>
+        <p><strong>Baby Weight:</strong> <%= pregnancy.babyWeight %> g</p>
+        <p><strong>Baby Length:</strong> <%= pregnancy.babyLength %> cm</p>
+        <p><strong>Gender:</strong> <%= pregnancy.gender %></p>
+        <p><strong>Delivery Type:</strong> <%= pregnancy.deliveryType %></p>
+      </li>
+    <% }); %>
+  </ul>
+<% } else { %>
+  <p>No previous pregnancies recorded.</p>
+<% } %>
+
+
+  <!-- Medications -->
+  <h3>Medications</h3>
+  <p><%= record.medications %></p>
+
+  <!-- Follow-up -->
+  <h3>Follow-up</h3>
+
+<% if (record.followUp && Array.isArray(record.followUp) && record.followUp.length > 0) { %>
+  <ul>
+    <% record.followUp.forEach(function(followUp) { %>
+      <li>
+        <p><strong>Date:</strong> <%= followUp.date %></p>
+        <p><strong>Midwife Notes:</strong> <%= followUp.midwifeNotes %></p>
+        <p><strong>Blood Results:</strong> <%= followUp.bloodResults %></p>
+        <p><strong>Ultrasound Details:</strong> <%= followUp.ultrasoundDetails %></p>
+      </li>
+    <% }); %>
+  </ul>
+<% } else { %>
+  <p>No follow-up records available.</p>
+<% } %>
+
+
+  <!-- Risk Factors -->
+  <h3>Risk Factors</h3>
+  <p><strong>Smoking:</strong> <%= record.riskFactors.smoking === 'true' ? 'Yes' : 'No' %></p>
+  <p><strong>Alcohol:</strong> <%= record.riskFactors.alcohol %></p>
+  <p><strong>Blood Pressure Issues:</strong> <%= record.riskFactors.bloodPressure %></p>
+  <p><strong>Anemia:</strong> <%= record.riskFactors.anemia === 'true' ? 'Yes' : 'No' %></p>
+  <p><strong>Pre-eclampsia:</strong> <%= record.riskFactors.preEclampsia === 'true' ? 'Yes' : 'No' %></p>
+
+  <!-- Lab Results -->
+  <h3>Lab Results</h3>
+  <p><strong>Ferritin:</strong> <%= record.labResults.ferritin %></p>
+  <p><strong>TSH:</strong> <%= record.labResults.TSH %></p>
+  <p><strong>Free Thyroxine:</strong> <%= record.labResults.freeThyroxine %></p>
+  <p><strong>Rh Factor:</strong> <%= record.labResults.RhFactor %></p>
+  <p><strong>Rubella Immunity:</strong> <%= record.labResults.rubellaImmunity %></p>
+  <p><strong>Syphilis:</strong> <%= record.labResults.syphilis %></p>
+
+  <!-- Delivery Details -->
+  <h3>Delivery Details</h3>
+  <p><strong>Delivery Type:</strong> <%= record.deliveryDetails.deliveryType %></p>
+  <p><strong>Birth Date:</strong> <%= record.deliveryDetails.birthDate %></p>
+  <p><strong>Birth Time:</strong> <%= record.deliveryDetails.birthTime %></p>
+  <p><strong>Gestational Week:</strong> <%= record.deliveryDetails.gestationalWeek %></p>
+  <p><strong>Gender:</strong> <%= record.deliveryDetails.gender %></p>
+  <p><strong>Birth Weight:</strong> <%= record.deliveryDetails.birthWeight %> g</p>
+  <p><strong>Birth Length:</strong> <%= record.deliveryDetails.birthLength %> cm</p>
+  <p><strong>Head Circumference:</strong> <%= record.deliveryDetails.headCircumference %> cm</p>
+
+  <!-- Apgar Scores -->
+  <h4>Apgar Scores</h4>
+  <p><strong>1 Minute:</strong> <%= record.deliveryDetails.apgarScore.oneMinute %></p>
+  <p><strong>5 Minutes:</strong> <%= record.deliveryDetails.apgarScore.fiveMinutes %></p>
+  <p><strong>10 Minutes:</strong> <%= record.deliveryDetails.apgarScore.tenMinutes %></p>
+
+  <!-- Partogram -->
+  <h3>Partogram</h3>
+  <ul>
+    <% record.partogram.forEach(function(parto) { %>
+      <li>
+        <p><strong>Time:</strong> <%= parto.time %></p>
+        <p><strong>Cervical Dilation:</strong> <%= parto.cervicalDilation %> cm</p>
+        <p><strong>Fetal Heart Rate:</strong> <%= parto.fetalHeartRate %></p>
+        <p><strong>Contractions Strength:</strong> <%= parto.contractionsStrength %></p>
+        <p><strong>Fetal Head Descent:</strong> <%= parto.fetalHeadDescent %> cm</p>
+      </li>
+    <% }); %>
+  </ul>
+
+  <!-- Back Button -->
+  <a href="/records" class="btn btn-secondary">Back to Records</a>
+</body>
+</html>
