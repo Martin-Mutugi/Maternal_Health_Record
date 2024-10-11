@@ -6,12 +6,14 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
-  "author": "",
+  "author": "Your Name",
   "license": "ISC",
-  "description": "",
+  "description": "A maternal health record tracking system.",
   "dependencies": {
     "dotenv": "^16.4.5",
     "ejs": "^3.1.10",
     "express": "^4.21.1",
     "firebase": "^10.14.1",
-    "fireb
+    "firebase-admin": "^12.6.0"
+  }
+}
